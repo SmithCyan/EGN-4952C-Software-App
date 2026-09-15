@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		87C398893059E3CD00BB4087 /* ParseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 87C398883059E3CD00BB4087 /* ParseSwift */; };
+		87C3988C3059E3E200BB4087 /* ParseLiveQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 87C3988B3059E3E200BB4087 /* ParseLiveQuery */; };
+		87C3988E3059E3E200BB4087 /* ParseObjC in Frameworks */ = {isa = PBXBuildFile; productRef = 87C3988D3059E3E200BB4087 /* ParseObjC */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		87C398383059BF9100BB4087 /* EGN 4952C Software App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EGN 4952C Software App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87C3988E3059E3E200BB4087 /* ParseObjC in Frameworks */,
+				87C398893059E3CD00BB4087 /* ParseSwift in Frameworks */,
+				87C3988C3059E3E200BB4087 /* ParseLiveQuery in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +74,9 @@
 			);
 			name = "EGN 4952C Software App";
 			packageProductDependencies = (
+				87C398883059E3CD00BB4087 /* ParseSwift */,
+				87C3988B3059E3E200BB4087 /* ParseLiveQuery */,
+				87C3988D3059E3E200BB4087 /* ParseObjC */,
 			);
 			productName = "EGN 4952C Software App";
 			productReference = 87C398383059BF9100BB4087 /* EGN 4952C Software App.app */;
@@ -94,6 +106,10 @@
 			);
 			mainGroup = 87C3982F3059BF9100BB4087;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				87C398873059E3CD00BB4087 /* XCRemoteSwiftPackageReference "Parse-Swift" */,
+				87C3988A3059E3E200BB4087 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 87C398393059BF9100BB4087 /* Products */;
 			projectDirPath = "";
@@ -332,6 +348,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		87C398873059E3CD00BB4087 /* XCRemoteSwiftPackageReference "Parse-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/parse-community/Parse-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.14.2;
+			};
+		};
+		87C3988A3059E3E200BB4087 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/parse-community/Parse-SDK-iOS-OSX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		87C398883059E3CD00BB4087 /* ParseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87C398873059E3CD00BB4087 /* XCRemoteSwiftPackageReference "Parse-Swift" */;
+			productName = ParseSwift;
+		};
+		87C3988B3059E3E200BB4087 /* ParseLiveQuery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87C3988A3059E3E200BB4087 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseLiveQuery;
+		};
+		87C3988D3059E3E200BB4087 /* ParseObjC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87C3988A3059E3E200BB4087 /* XCRemoteSwiftPackageReference "Parse-SDK-iOS-OSX" */;
+			productName = ParseObjC;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 87C398303059BF9100BB4087 /* Project object */;
 }
