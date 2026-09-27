@@ -3,63 +3,76 @@
 //  Created by Nitsa Saint Fort on 9/18/26.
 
 import SwiftUI
-import ParseSwift
 
 struct HomeView: View {
+    
     @ObservedObject var viewModel: AuthViewModel
+    
+    @State private var searchText = ""
+    @State private var meals: [Meal] = []
+    @State private var errorMessage = ""
+    
+    let mealService = MealService()
+    
     var body: some View {
-        ZStack {
-            // Background
-            TiledBackground(imageName: "Image")
-            VStack {
-                Text("Welcome!")
-                    .font(.largeTitle)
+        VStack {
+            
+            Text("Recipes")
+                .font(.largeTitle)
+                .bold()
+            
+            HStack {
+                TextField("Search for a recipe", text: $searchText)
+                    .textFieldStyle(.roundedBorder)
                 
-                VStack(spacing: 20) {
-                            Text("Recipe Collection App")
-                        .font(.largeTitle)
-                        .bold()
-                    
-                    TextField("Email", text: $viewModel.email)
-                        .textFieldStyle(.roundedBorder)
-                        .autocapitalization(.none)
-                    
-                    SecureField("Password", text: $viewModel.password)
-                        .textFieldStyle(.roundedBorder)
-                    
-                    if !viewModel.errorMessage.isEmpty {
-                        Text(viewModel.errorMessage)
-                            .foregroundColor(.red)
-                            .font(.caption)
+                Button("Search") {
+                    Task {
+                        await searchMeals()
                     }
-                    Button(action: {
-                        viewModel.login()
-                    }) {
-                        Text("Login")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                    Spacer()
-                    
-                    NavigationLink("Don't have an account? Sign up.",
-                                   destination:  SignupView(authViewModel: AuthViewModel()))
                 }
-                .foregroundColor(Color.blue)
-                .font(.footnote)
-                .padding(.bottom)
+                .buttonStyle(.borderedProminent)
             }
             .padding()
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Log Out") {
-                        viewModel.logout()
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+            }
+            
+            List(meals) { meal in
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    
+                    Text(meal.strMeal)
+                        .font(.headline)
+                    
+                    if let category = meal.strCategory {
+                        Text(category)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
         }
+        .navigationTitle("Recipes")
+    }
+    
+    func searchMeals() async {
+        
+        do {
+            let results = try await mealService.searchMeals(
+                searchText: searchText
+            )
+            
+            meals = results
+            errorMessage = ""
+            
+        } catch {
+            errorMessage = "Unable to load recipes."
+            print(error)
+        }
     }
 }
 
+#Preview {
+    HomeView(viewModel: AuthViewModel())
+}

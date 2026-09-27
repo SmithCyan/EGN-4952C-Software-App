@@ -12,7 +12,7 @@ struct LoginView: View {
     var body: some View {
         ZStack {
             // Background
-            TiledBackground(imageName: "Image")
+            TitledBackground(imageName: "Image")
             VStack(spacing: 20) {
                 
                 Text("Recipe Collection App")
