@@ -4,9 +4,17 @@
 
 
 import SwiftUI
+import ParseSwift
 
 @main
 struct RecipeCollectionApp: App {
+
+    init() {
+        ParseSwift.initialize(applicationId: "Ap6X62gAwn18FgjKF8G1MR26gEvIBnB3ANYcp7wx",
+            clientKey: "VltBxOd8ip1GACLKutF2sOxDRqCnXFcggLIKrXPt",
+            serverURL: URL(string: "https://parseapi.back4app.com")!)
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

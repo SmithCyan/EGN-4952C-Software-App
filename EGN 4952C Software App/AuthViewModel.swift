@@ -4,6 +4,8 @@
 
 import SwiftUI
 import ParseSwift
+import SwiftUI
+import ParseSwift
 import Combine
 
 class AuthViewModel: ObservableObject {
@@ -132,3 +134,4 @@ class AuthViewModel: ObservableObject {
         }
     }
 }
+
