@@ -16,6 +16,12 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
+            Button("Log Out") {
+                viewModel.logout()
+            }
+            .buttonStyle(.bordered)
+            .foregroundColor(.red)
+            .padding()
             
             Text("Recipes")
                 .font(.largeTitle)
