@@ -1,10 +1,10 @@
-//  TiledBackground.swift
+//  TitledBackground.swift
 //  EGN 4952C Software App
 //  Created by Nitsa Saint Fort on 9/27/26.
 
 import SwiftUI
 
-struct TiledBackground: View {
+struct TitledBackground: View {
     var imageName: String
     
     var body: some View {
