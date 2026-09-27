@@ -1,4 +1,4 @@
-//  Home Screen.swift
+//  HomeView.swift
 //  EGN 4952C Software App
 //  Created by Nitsa Saint Fort on 9/18/26.
 
