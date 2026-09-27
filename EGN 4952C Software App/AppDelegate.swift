@@ -1,8 +1,8 @@
 //  AppDelegate.swift
 //  EGN 4952C Software App
 //  Created by Nitsa Saint Fort on 9/18/26.
-import ParseSwift
 import UIKit
+import ParseSwift
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
