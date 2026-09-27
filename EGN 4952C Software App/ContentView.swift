@@ -1,20 +1,99 @@
-//  ContentView.swift
+// ContentView.swift
 // EGN 4952C Software App
 // Recipe Collection App
 // Created by Nitsa Saint Fort on 9/15/26.
-
 
 import SwiftUI
 import Combine
 import ParseSwift
 
+class AuthViewModel: ObservableObject {
+    @Published var username = ""
+    @Published var email = ""
+    @Published var password = ""
+    @Published var passwordConfirmed = ""
+    @Published var errorMessage = ""
+    @Published var isLoggedIn = false
 
-struct ContentView: View {
-    ParseSwift.initialize(applicationId: "Ap6X62gAwn18FgjKF8G1MR26gEvIBnB3ANYcp7wx",
-         clientKey: "VltBxOd8ip1GACLKutF2sOxDRqCnXFcggLIKrXPt",
-         serverURL: URL(string: "https://parseapi.back4app.com")!)
+    func login() {
+        errorMessage = ""
+        guard !email.isEmpty, !password.isEmpty else {
+            errorMessage = "Please fill in all fields."
+            return
+        }
+
+        User.login(username: email, password: password) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    print("Logged in as", user.username ?? "(no username)")
+                    self.isLoggedIn = true
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func signup() {
+        errorMessage = ""
+        guard !username.isEmpty, !email.isEmpty, !password.isEmpty, !passwordConfirmed.isEmpty else {
+            errorMessage = "Please fill in all fields."
+            return
+        }
+        guard password == passwordConfirmed else {
+            errorMessage = "Passwords do not match."
+            return
+        }
+
+        var newUser = User()
+        newUser.username = username
+        newUser.email = email
+        newUser.password = password
+
+        newUser.signup { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    print("Signed up:", user.username ?? "(none)")
+                    self.isLoggedIn = true
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    func logout() {
+        User.logout { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    print("Logged out")
+                    self.isLoggedIn = false
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
 }
 
-#Preview {
-    ContentView()
-}
+    struct ContentView: View {
+        @StateObject private var authViewModel = AuthViewModel()
+        
+        var body: some View {
+            NavigationStack {
+                if authViewModel.isLoggedIn {
+                    HomeView(viewModel: authViewModel)
+                } else {
+                    LoginView(authViewModel: authViewModel)
+                }
+            }
+        }
+    }
+    
+    #Preview {
+        ContentView()
+    }
+
