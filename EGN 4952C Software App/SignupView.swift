@@ -51,7 +51,7 @@ struct SignupView: View {
             Spacer()
         }
         .navigationDestination(isPresented: $isSignedUp) {
-            AnimalSearch(authViewModel: authViewModel)
+            Recipe(authViewModel: authViewModel)
         }
     }
 }
