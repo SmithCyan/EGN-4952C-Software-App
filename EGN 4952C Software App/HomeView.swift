@@ -16,7 +16,7 @@ struct HomeView: View {
                     .font(.largeTitle)
                 
                 VStack(spacing: 20) {
-                    Text("Recipe Collection App")
+                            Text("Recipe Collection App")
                         .font(.largeTitle)
                         .bold()
                     
