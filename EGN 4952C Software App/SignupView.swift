@@ -51,7 +51,7 @@ struct SignupView: View {
             Spacer()
         }
         .navigationDestination(isPresented: $isSignedUp) {
-            Recipe(authViewModel: authViewModel)
+            HomeView(viewModel: authViewModel)
         }
     }
 }
